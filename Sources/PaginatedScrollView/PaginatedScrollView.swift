@@ -29,10 +29,11 @@ public struct PaginatedScrollView<Content: View>: View {
                     if canRefresh {
                         if manager.isLoading {
                             ProgressView()
-                        } else {
-                            ProgressView("", value: manager.isLoading ? 100 : manager.reloader.progressValue, total: 100.00)
-                                .labelsHidden()
                         }
+//                        else {
+//                            ProgressView("", value: manager.isLoading ? 100 : manager.reloader.progressValue, total: 100.00)
+//                                .labelsHidden()
+//                        }
                     }
                     
                     content()
