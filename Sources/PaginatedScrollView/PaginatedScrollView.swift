@@ -46,7 +46,7 @@ public struct PaginatedScrollView<Content: View>: View {
                     }
                     
                     if noMoreData {
-                        Text("到底了~")
+                        Text("我可是有底线的~")
                             .font(.system(size: 14))
                             .foregroundColor(Color(uiColor: UIColor.lightGray))
                     }
