@@ -67,7 +67,9 @@ public struct PaginatedScrollView<Content: View>: View {
                 if data.position == .top {
                     refresh(data: data)
                 } else {
-                    loadMore(data: data)
+                    if !noMoreData {
+                        loadMore(data: data)
+                    }
                 }
             }
         }
