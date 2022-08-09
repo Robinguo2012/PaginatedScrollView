@@ -41,7 +41,7 @@ public struct PaginatedScrollView<Content: View>: View {
                     
                     content()
                     
-                    if canLoadMore && manager.moreLoader.canLoadMore && noMoreData{
+                    if canLoadMore && manager.moreLoader.canLoadMore && !noMoreData{
                         ProgressView("加载中...")
                     }
                     
