@@ -9,6 +9,8 @@ import SwiftUI
 
 public struct PaginatedScrollView<Content: View>: View {
     
+    var noMoreData: Bool = false
+    
     @Environment(\.reload) public var reloadAction: ReloadAction?
     private var canRefresh: Bool { reloadAction != nil }
     @Environment(\.loadMore) public var loadMoreAction: LoadMoreAction?
@@ -19,7 +21,6 @@ public struct PaginatedScrollView<Content: View>: View {
     private let content: () -> Content
     public init(settings: PaginatedScrollViewSettings = .defaultSettings, @ViewBuilder content: @escaping () -> Content) {
         self.content = content
-    
     }
     
     public var body: some View {
@@ -29,6 +30,7 @@ public struct PaginatedScrollView<Content: View>: View {
                     if canRefresh {
                         if manager.isLoading {
                             ProgressView()
+                            
                         }
 //                        else {
 //                            ProgressView("", value: manager.isLoading ? 100 : manager.reloader.progressValue, total: 100.00)
@@ -38,8 +40,14 @@ public struct PaginatedScrollView<Content: View>: View {
                     
                     content()
                     
-                    if canLoadMore && manager.moreLoader.canLoadMore {
-                        ProgressView()
+                    if canLoadMore && manager.moreLoader.canLoadMore && noMoreData{
+                        ProgressView("加载中...")
+                    }
+                    
+                    if noMoreData {
+                        Text("到底了~")
+                            .font(.system(size: 14))
+                            .foregroundColor(Color(uiColor: UIColor.lightGray))
                     }
                 }
                 .padding(.bottom, geometry.safeAreaInsets.bottom)
