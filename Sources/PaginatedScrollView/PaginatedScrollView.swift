@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct PaginatedScrollView<Content: View>: View {
     
-    var noMoreData: Bool = false
+    var noMoreData: Bool
     
     @Environment(\.reload) public var reloadAction: ReloadAction?
     private var canRefresh: Bool { reloadAction != nil }
@@ -19,8 +19,9 @@ public struct PaginatedScrollView<Content: View>: View {
     @StateObject private var manager = PaginatedScrollViewManager(settings: .defaultSettings)
     
     private let content: () -> Content
-    public init(settings: PaginatedScrollViewSettings = .defaultSettings, @ViewBuilder content: @escaping () -> Content) {
+    public init(noMoreData: Bool, settings: PaginatedScrollViewSettings = .defaultSettings, @ViewBuilder content: @escaping () -> Content) {
         self.content = content
+        self.noMoreData = noMoreData
     }
     
     public var body: some View {
