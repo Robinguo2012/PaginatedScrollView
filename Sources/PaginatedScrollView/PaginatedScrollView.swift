@@ -51,16 +51,16 @@ public struct PaginatedScrollView<Content: View>: View {
                             .foregroundColor(Color(uiColor: UIColor.lightGray))
                     }
                 }
-                .padding(.bottom, geometry.safeAreaInsets.bottom)
+//                .padding(.bottom, geometry.safeAreaInsets.bottom)
                 .frame(width: geometry.size.width)
                 .background(Color(uiColor: .lightGray).frame(height: 99999999))
-//                .anchorPreference(key: PaginatedScrollViewKey.PreKey.self, value: .bounds) {
-//                    guard (canRefresh || canLoadMore) && manager.canreturn && !manager.isLoading else { return nil }
-//                    let frame = geometry[$0]
-//                    let top = frame.minY
-//                    let bottom = frame.maxY - geometry.size.height
-//                    return PaginatedScrollViewKey.PreData(top: top, bottom: bottom)
-//                }
+                .anchorPreference(key: PaginatedScrollViewKey.PreKey.self, value: .bounds) {
+                    guard (canRefresh || canLoadMore) && manager.canreturn && !manager.isLoading else { return nil }
+                    let frame = geometry[$0]
+                    let top = frame.minY
+                    let bottom = frame.maxY - geometry.size.height
+                    return PaginatedScrollViewKey.PreData(top: top, bottom: bottom)
+                }
             }
             .onPreferenceChange(PaginatedScrollViewKey.PreKey.self) { data in
                 guard let data = data, !manager.isLoading else { return }
