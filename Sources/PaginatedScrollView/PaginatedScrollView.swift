@@ -51,7 +51,7 @@ public struct PaginatedScrollView<Content: View>: View {
                             .foregroundColor(Color(uiColor: UIColor.lightGray))
                     }
                 }
-//                .padding(.bottom, geometry.safeAreaInsets.bottom)
+                .padding(.bottom, 0)
                 .frame(width: geometry.size.width)
                 .background(Color(uiColor: .groupTableViewBackground).frame(height: 99999999))
                 .anchorPreference(key: PaginatedScrollViewKey.PreKey.self, value: .bounds) {
